@@ -1,0 +1,97 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<FoodDeliveryApplicationUser> UserManager
+
+@{
+    var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+    FoodDeliveryApplicationUser user = null;
+    if (userId != null)
+    {
+        user = UserManager.FindByIdAsync(userId).Result;
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Payment Success</title>
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        a {
+            color: #2196f3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .user-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: left;
+        }
+
+            .user-info p {
+                margin: 5px 0;
+            }
+
+        .success-message {
+            color: #4caf50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Success!</h1>
+
+        <p class="success-message">Your payment was processed successfully.</p>
+
+        @if (user != null)
+        {
+            <div class="user-info">
+                <p><strong>Name:</strong> @user.FirstName @user.LastName</p>
+                <p><strong>Email:</strong> @user.Email</p>
+     
+            </div>
+        }
+
+        <p>Thank you for your order!</p>
+        <p>Redirect <a asp-controller="Restaurants" asp-action="Index">back</a></p>
+    </div>
+</body>
+</html>

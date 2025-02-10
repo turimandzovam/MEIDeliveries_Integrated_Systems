@@ -1,0 +1,64 @@
+﻿@model FoodDelivery.Domain.Domain.Restaurant
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Restaurant Name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantName)
+        </dd>
+        <dt class = "col-sm-2">
+            Restaurant Location
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantLocation)
+        </dd>
+        <dt class = "col-sm-2">
+            Restaurant Image
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantImage)
+        </dd>
+        <dt class = "col-sm-2">
+            Delivery Time
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryTime)
+        </dd>
+        <dt class = "col-sm-2">
+            Delivery price
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MinPriceForOrder)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OnlinePayment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OnlinePayment)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CashPayment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CashPayment)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

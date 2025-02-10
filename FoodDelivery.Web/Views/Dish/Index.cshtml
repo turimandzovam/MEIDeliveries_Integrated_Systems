@@ -1,0 +1,69 @@
+﻿@model List<FoodDelivery.Domain.Domain.Dish>
+@{
+    ViewData["Title"] = "Dishes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Food</h1>
+<div class="container-fluid">
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-success mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+            </svg> Add New Meal
+        </a>
+    }
+
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        var item = Model[i];
+
+        if (i % 3 == 0)
+        {
+            @:<div class="row" style="margin-top="20px">
+        }
+
+        <div class="col-md-3 m-3">
+            <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none text-dark">
+                <div class="card mb-3" style="width: 18rem; height: 30rem;">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <img src="@item.DishImage" class="img-fluid rounded" style="object-fit: cover; height: 18rem; width: 18rem;" alt="Dish Image">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">@item.DishName</h5>
+                                <p class="card-text">@item.DishIngredients</p>
+                                <p class="card-text"><small class="text-body-secondary">@item.Price ден.</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        if (i % 3 == 2 || i == Model.Count - 1)
+        {
+            @:</div>
+        }
+    }
+</div>
+
+
+<style>
+        h1{
+        text-align:center;
+        margin-bottom:30px;
+        font-weight:bold;
+        
+    }
+    .card {
+       
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.2s; 
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+</style>

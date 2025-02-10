@@ -1,0 +1,47 @@
+﻿@using FoodDelivery.Domain.Payment
+@using Microsoft.Extensions.Options
+@model FoodDelivery.Domain.DTO.OrderDetailsDTO
+@inject IOptions<StripeSettings> Stripe
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Order Details</h1>
+
+<p><strong>Address:</strong> @Model.Address</p>
+<p><strong>Phone:</strong> @Model.Phone</p>
+<p><strong>Total Price:</strong> @Model.TotalPrice den</p>
+
+
+@if (Model.PaymentMethod == "Online")
+{
+    <form id="payment-form" method="post" asp-action="PayOrder">
+        <input type="hidden" name="Address" value="@Model.Address" />
+        <input type="hidden" name="Phone" value="@Model.Phone" />
+        <input type="hidden" name="TotalPrice" value="@Model.TotalPrice" />
+        <script src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="@Stripe.Value.PublicKey"
+                data-locale="auto"
+                data-description="FoodDelivery Application Payment"
+                data-amount="@(Model.TotalPrice * 100)"
+                data-label="Pay @Model.TotalPrice den">
+        </script>
+    </form>
+
+}
+else
+{
+    <form id="payment-form" method="post" asp-action="Order">
+        <input type="hidden" name="Address" value="@Model.Address" />
+        <input type="hidden" name="Phone" value="@Model.Phone" />
+        <input type="hidden" name="TotalPrice" value="@Model.TotalPrice" />
+        <div id="card-element"></div>
+        <button type="submit" id="pay-button" class="btn btn-primary">Order</button>
+    </form>
+}
+<a asp-controller="ShoppingCarts" asp-action="Index">Back to cart</a>
+
+   

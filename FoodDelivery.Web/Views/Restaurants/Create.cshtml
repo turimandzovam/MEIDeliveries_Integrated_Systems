@@ -1,0 +1,70 @@
+﻿@model FoodDelivery.Domain.Domain.Restaurant
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1>Add new Restaurant</h1>
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-4">
+                <label asp-for="RestaurantName" class="control-label">Restaurant name</label>
+                <input asp-for="RestaurantName" class="form-control" />
+                <span asp-validation-for="RestaurantName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="RestaurantLocation" class="control-label">Location</label>
+                <input asp-for="RestaurantLocation" class="form-control" />
+                <span asp-validation-for="RestaurantLocation" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="RestaurantImage" class="control-label">Image URL</label>
+                <input asp-for="RestaurantImage" class="form-control" />
+                <span asp-validation-for="RestaurantImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="DeliveryTime" class="control-label">Delivery time (mm-mm)</label>
+                <input asp-for="DeliveryTime" class="form-control" />
+                <span asp-validation-for="DeliveryTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="MinPriceForOrder" class="control-label">Delivery price</label>
+                <input asp-for="MinPriceForOrder" class="form-control" />
+                <span asp-validation-for="MinPriceForOrder" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" asp-for="OnlinePayment" id="flexCheckDefault1">
+                <label class="form-check-label" for="flexCheckDefault1">
+                    Online Payment
+                </label>
+            </div>
+
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" asp-for="CashPayment" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Cash Payment
+                </label>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-dark ms-2">Back to List</a>
+            </div>
+        </form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
