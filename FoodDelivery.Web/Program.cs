@@ -7,6 +7,7 @@ using FoodDelivery.Repository.Interface;
 using FoodDelivery.Service.Interface;
 using FoodDelivery.Service.Implementation;
 using FoodDelivery.Domain.Payment;
+using FoodDelivery.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,12 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 // Configure DbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure()));
+
+builder.Services.AddDbContext<TravelAgencyDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // Configure Identity with roles

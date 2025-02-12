@@ -1,0 +1,31 @@
+﻿@model IEnumerable<FoodDelivery.Web.Models.Accommodation>
+
+@{
+    ViewData["Title"] = "All Accommodations";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Accommodation Type</th>
+            <th>Price Per Night</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var accommodation in Model)
+        {
+            <tr>
+                <td>@accommodation.Name</td>
+                <td>@accommodation.AccommodationType</td>
+                <td>@accommodation.PricePerNight</td>
+                <td>
+                    <a href="@Url.Action("AccommodationDetails", "Travel", new { id = accommodation.Id })">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

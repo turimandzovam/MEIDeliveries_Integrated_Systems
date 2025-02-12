@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FoodDelivery.Web.Models.TravelPackage>
+
+@{
+    ViewData["Title"] = "All Travel Packages";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Package Name</th>
+            <th>Accommodation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var travelPackage in Model)
+        {
+            <tr>
+                <td>@travelPackage.Name</td>
+                <td>@travelPackage.Accommodation.Name</td> <!-- Displaying related accommodation -->              
+            </tr>
+        }
+    </tbody>
+</table>
